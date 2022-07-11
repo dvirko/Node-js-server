@@ -4,9 +4,12 @@ const app = express();
   
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
     
-// app.get('/', (req, res) => {
-//   res.sendFile(__dirname + '/index.html');
-// });
+app.get('/', (res) => {
+    const user = {
+        name: 'Dvir'
+       }
+       res.status(201).json(user)
+});
     
 app.post('/', urlencodedParser, (req, res) => {
     console.log('Got body:', req.body);
