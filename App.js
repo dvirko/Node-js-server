@@ -1,5 +1,6 @@
 const express = require('express');
 var bodyParser = require('body-parser');
+const request = require('request');
 var mongo = require('mongodb');
 const cors = require('cors');
 const app = express();
@@ -8,18 +9,10 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 var MongoClient = mongo.MongoClient;
 var url = "mongodb+srv://dvir:dvirko1221@data.my748.mongodb.net/?retryWrites=true&w=majority";
 
-app.get("/image", urlencodedParser, (req, res) => {
-    var requestSettings = {
-        url: 'https://www.google.com/images/srpr/logo11w.png',
-        method: 'GET',
-        encoding: null
-    };
+app.get('/image', (req, res) => {
+    res.sendFile(__dirname+'./img/IMG_0280.JPG');
+})
 
-    req(requestSettings, function(error, response, body) {
-        res.set('Content-Type', 'image/png');
-        res.send(body);
-    });
-});
 
 app.get('/', urlencodedParser, (req, res) => {
 MongoClient.connect(url, function(err, db) {
