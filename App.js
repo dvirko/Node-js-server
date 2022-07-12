@@ -1,5 +1,6 @@
 const express = require('express');
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
+const path = require('path');
 var mongo = require('mongodb');
 const cors = require('cors');
 const app = express();
@@ -10,10 +11,23 @@ var url = "mongodb+srv://dvir:dvirko1221@data.my748.mongodb.net/?retryWrites=tru
 
 
 app.get('/', urlencodedParser, (req, res) => {
-    MongoClient.connect(url, function(err, db) {
+MongoClient.connect(url, function(err, db) {
         if (err) throw err;
         var dbo = db.db("TOMATACTI_DB");
         dbo.collection("person").find({}).toArray(function(err, result) {
+            if (err) throw err;
+            res.json(result);
+            db.close();
+          });
+        });
+});
+
+app.get('/name/:tagId', urlencodedParser, (req, res) => {
+const id = req.params.tagId;
+MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        var dbo = db.db("TOMATACTI_DB");
+        dbo.collection("person").find({id}).toArray(function(err, result) {
             if (err) throw err;
             res.json(result);
             db.close();
