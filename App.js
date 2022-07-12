@@ -8,7 +8,7 @@ var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb+srv://dvir:dvirko1221@data.my748.mongodb.net/?retryWrites=true&w=majority";
 
 
-app.get('/', (res) => {
+app.get('/', urlencodedParser, (req, res) => {
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
         var dbo = db.db("TOMATACTI_DB");
