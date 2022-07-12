@@ -1,8 +1,9 @@
 const express = require('express');
 var bodyParser = require('body-parser')
 var mongo = require('mongodb');
+const cors = require('cors');
 const app = express();
-  
+app.use(cors());
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb+srv://dvir:dvirko1221@data.my748.mongodb.net/?retryWrites=true&w=majority";
